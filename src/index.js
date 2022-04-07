@@ -41,9 +41,9 @@ async function search() {
 
 searchButtonElement.addEventListener("click", search);
 
-getWeatherData("egypt", "metric").then((weather) => {
+getWeatherData("Egypt", "metric").then((weather) => {
     renderWeatherData(weather);
-    getGIFData(weather.place).then((data) => {
+    getGIFData(weather.title).then((data) => {
         renderGIFData(data);
     });
 });

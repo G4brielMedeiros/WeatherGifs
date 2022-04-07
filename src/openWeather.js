@@ -11,6 +11,7 @@ export async function getWeatherData(city, units = "standard") {
 
     const data = await response.json();
 
+    log(data)
     const formattedData = {
         place: data.name,
         temp: data.main.temp,

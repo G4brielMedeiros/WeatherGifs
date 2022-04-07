@@ -28,7 +28,7 @@ async function search() {
     weatherImgElement.src = "images/loading.gif";
 
     const units = searchInputMetricElement.checked ? "metric" : "imperial";
-    const city = searchInputElement.value;
+    const city = searchInputElement.value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
     log(units);
 

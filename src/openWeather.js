@@ -27,5 +27,5 @@ export const kelvinToCelsius = (temp) => temp - 273.15;
 
 export const kelvinToFahrenheit = (temp) => temp * 1.8 - 459.67;
 
-export const convertUnit = (temp, celsius) => 
-    (celsius) ? kelvinToCelsius(temp) : kelvinToFahrenheit(temp);
+export const convertUnit = (temp, celsius) =>
+    celsius ? kelvinToCelsius(temp) : kelvinToFahrenheit(temp);

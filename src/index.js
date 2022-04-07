@@ -2,7 +2,6 @@ import { getGIFData } from "./giphy";
 import { getWeatherData, logWeatherData } from "./openWeather";
 import { getElement, log } from "./utility";
 
-const searchElement = getElement("search-form");
 const searchInputElement = getElement("search-input");
 const searchInputMetricElement = getElement("metric");
 const weatherStatusElement = getElement("weather-description");
@@ -41,3 +40,10 @@ async function search() {
 }
 
 searchButtonElement.addEventListener("click", search);
+
+getWeatherData('egypt', 'metric').then((weather) => {
+  renderWeatherData(weather);
+  getGIFData(weather.place).then((data) => {
+    renderGIFData(data)
+  })
+})

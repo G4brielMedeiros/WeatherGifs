@@ -1,26 +1,31 @@
 import { log } from "./utility";
 
-function getAPIcall(city) {
+function getAPIcall(city, units) {
     const API_KEY = "ca659f3e8873be553c03fadf808cffe3";
-    const API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}`;
+    const API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}&units=${units}`;
     return API;
 }
 
-export async function getWeatherData(city) {
-    const response = await fetch(getAPIcall(city), { mode: "cors" });
+export async function getWeatherData(city, units = "standard") {
+    const response = await fetch(getAPIcall(city, units), { mode: "cors" });
 
-    const weatherData = await response.json();
+    const data = await response.json();
 
-    return weatherData;
+    const formattedData = {
+        place: data.name,
+        temp: data.main.temp,
+        min: data.main.temp_min,
+        max: data.main.temp_max,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        title: data.weather[0].main,
+    };
+    return formattedData;
 }
 
-export async function logWeatherData(city) {
-    const data = await getWeatherData(city);
-    log(data);
+export const kelvinToCelsius = (temp) => temp - 273.15;
 
-    log(data.name);
+export const kelvinToFahrenheit = (temp) => temp * 1.8 - 459.67;
 
-    log(data.weather[0].main)
-}
-
-
+export const convertUnit = (temp, celsius) => 
+    (celsius) ? kelvinToCelsius(temp) : kelvinToFahrenheit(temp);

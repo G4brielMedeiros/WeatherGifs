@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="bundle.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Weather GIFs</title>
-</head>
-<body>
-    <header>
-        <h1>Weather GIFs</h1>
-    </header>
-    <main>
-        <form id="search-form" action="#">
-            <input id="search-input" type="text" placeholder="Brasilia">
-            <button id="search-button">Search</button>
-        </form>
-        <img id="weather-gif" src="" alt="loading">
-        
-        <p id="weather-status" ></p>
-    </main>
-    <footer><p>by Gabriel Medeiros</p></footer>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="bundle.js" defer></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>Weather GIFs</title>
+    </head>
+    <body>
+        <header>
+            <h1>Weather GIFs</h1>
+        </header>
+        <main>
+            <div class="search">
+                <input id="search-input" type="text" placeholder="Brasilia" />
+                <label for="metric">metric</label>
+                <input id="metric" type="checkbox" name="metric" />
+                <button id="search-button">Search</button>
+            </div>
+
+            <img id="weather-gif" src="" alt="loading" />
+            <p id="weather-temperature">loading...</p>
+            <p id="weather-description">loading...</p>
+        </main>
+        <footer><p>by Gabriel Medeiros</p></footer>
+    </body>
 </html>

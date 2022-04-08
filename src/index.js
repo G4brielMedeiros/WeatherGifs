@@ -1,36 +1,53 @@
+import { format, fromUnixTime, getDate, getDay, getMonth, getWeek } from "date-fns";
 import { getGIFData } from "./giphy";
 import { getCoords, getWeatherData, logWeatherData } from "./openWeather";
 import {
-    getElement as $get,
-    setText as $setText,
-    getValue as $getValue,
+    getElement as $,
+    setText as $text,
+    getValue as $valueOf,
     listen as $setListen,
     log,
     normalize,
 } from "./utility";
 
+const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+];
+
+const getWeekDay = (date) => {return weekdays[fromUnixTime(date).getDay()]}
+
+const formatDate = (date) => {
+    const string = format(fromUnixTime(date), "PPPPpppp");
+    return string.slice(0, string.indexOf(" at"));
+};
 function renderWeatherData(weather) {
     log(weather);
 
-    $setText("city", weather.place);
-    $setText("date", weather.date);
-    $setText("weather-temp", weather.temp);
-    $setText("weather-desc", weather.description);
-    $setText("min", weather.min);
-    $setText("max", weather.max);
-    $setText("weather-feel", weather.feels);
+    $text("city", weather.place);
+    $text("date", formatDate(weather.date));
+    $text("weather-temp", weather.temp);
+    $text("weather-desc", weather.description);
+    $text("min", weather.min);
+    $text("max", weather.max);
+    $text("weather-feel", weather.feels);
 
-    $setText("min-1", weather.future[0].min);
-    $setText("min-2", weather.future[1].min);
-    $setText("min-3", weather.future[2].min);
+    $text("min-1", weather.future[0].min);
+    $text("min-2", weather.future[1].min);
+    $text("min-3", weather.future[2].min);
 
-    $setText("max-1", weather.future[0].max);
-    $setText("max-2", weather.future[1].max);
-    $setText("max-3", weather.future[2].max);
+    $text("max-1", weather.future[0].max);
+    $text("max-2", weather.future[1].max);
+    $text("max-3", weather.future[2].max);
 
-    $setText("weather-future-1-weekday", weather.future[0].dt);
-    $setText("weather-future-2-weekday", weather.future[1].dt);
-    $setText("weather-future-3-weekday", weather.future[2].dt);
+    $text("weather-future-1-weekday", getWeekDay(weather.future[0].dt));
+    $text("weather-future-2-weekday", getWeekDay(weather.future[1].dt));
+    $text("weather-future-3-weekday", getWeekDay(weather.future[2].dt));
 }
 
 // place
@@ -74,6 +91,6 @@ function search() {
 let city = localStorage.getItem("city") || "brasilia";
 let units = localStorage.getItem("units") || "imperial";
 
-$setListen($get("search-form"), "submit", () =>
-    fetchAndRender($getValue("search-input"))
-);
+$setListen($("search-form"), "submit", () => fetchAndRender($valueOf("search-input")));
+
+fetchAndRender(city);

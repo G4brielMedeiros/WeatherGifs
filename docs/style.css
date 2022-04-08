@@ -110,7 +110,7 @@ hr {
     padding-bottom: 10px;
 }
 
-#weather-feel {
+#weather-feel, #weather-feel-wrap {
     color: var(--faded-text-color);
     font-size: 0.8em;
     padding-bottom: 10px;

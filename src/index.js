@@ -1,29 +1,29 @@
 import { getGIFData } from "./giphy";
 import { getCoords, getWeatherData, logWeatherData } from "./openWeather";
-import { getElement as $, log, normalize } from "./utility";
+import { getElement as $, log, normalize, setText as $t } from "./utility";
 
 function renderWeatherData(weather) {
     log(weather);
 
-    $("city").textContent = weather.place;
-    $("date").textContent = weather.date;
-    $("weather-temp").textContent = weather.temp;
-    $("weather-desc").textContent = weather.description;
-    $("min").textContent = weather.min;
-    $("max").textContent = weather.max;
-    $("weather-feel").textContent = weather.feels;
+    $t("city" , weather.place );
+    $t("date" , weather.date );
+    $t("weather-temp" , weather.temp );
+    $t("weather-desc" , weather.description );
+    $t("min" , weather.min );
+    $t("max" , weather.max );
+    $t("weather-feel" , weather.feels );
 
-    $("min-1").textContent = weather.future[0].min;
-    $("min-2").textContent = weather.future[1].min;
-    $("min-3").textContent = weather.future[2].min;
+    $t("min-1" , weather.future[0].min );
+    $t("min-2" , weather.future[1].min );
+    $t("min-3" , weather.future[2].min );
 
-    $("max-1").textContent = weather.future[0].max;
-    $("max-2").textContent = weather.future[1].max;
-    $("max-3").textContent = weather.future[2].max;
+    $t("max-1" , weather.future[0].max );
+    $t("max-2" , weather.future[1].max );
+    $t("max-3" , weather.future[2].max );
 
-    $("weather-future-1-weekday").textContent = weather.future[0].dt;
-    $("weather-future-2-weekday").textContent = weather.future[1].dt;
-    $("weather-future-3-weekday").textContent = weather.future[2].dt;
+    $t("weather-future-1-weekday" , weather.future[0].dt );
+    $t("weather-future-2-weekday" , weather.future[1].dt );
+    $t("weather-future-3-weekday" , weather.future[2].dt );
 }
 
 // place

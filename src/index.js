@@ -2,12 +2,12 @@ import { getGIFData } from "./giphy";
 import { getWeatherData, logWeatherData } from "./openWeather";
 import { getElement, log, normalize } from "./utility";
 
-const searchInputElement = getElement("search-input");
-const searchInputMetricElement = getElement("metric");
-const weatherStatusElement = getElement("weather-description");
-const weatherImgElement = getElement("weather-gif");
-const searchButtonElement = getElement("search-button");
-const weatherTemperatureElement = getElement("weather-temperature");
+// const searchInputElement = getElement("search-input");
+// const searchInputMetricElement = getElement("metric");
+// const weatherStatusElement = getElement("weather-description");
+// const weatherImgElement = getElement("weather-gif");
+// const searchButtonElement = getElement("search-button");
+// const weatherTemperatureElement = getElement("weather-temperature");
 
 function renderWeatherData(weather, units) {
     weatherStatusElement.innerText = weather.description;
@@ -48,10 +48,10 @@ function search() {
     fetchAndRender(city, units);
 }
 
-searchButtonElement.addEventListener("click", search);
+// searchButtonElement.addEventListener("click", search);
 
 let city = localStorage.getItem('city') || "brasilia";
 let units = localStorage.getItem('units') || "imperial";
 
-fetchAndRender(city, units);
+//fetchAndRender(city, units);
 

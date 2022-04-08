@@ -1,36 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     --transparent-color: rgba(1, 1, 1, 0.1);
-    --bg-cold: #A5F3FC;
-    --bg-warm: #FEF08A;
-    --night: 
+    --faded-text-color: rgba(1, 1, 1, 0.5);
+    --bg-cold: #a5f3fc;
+    --bg-warm: #fef08a;
+    --night: ;
 
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
 }
 
 body {
-    width: 100%;
     background-color: var(--bg-warm);
-}
 
-#wrapper {
-    margin: 10px;
+    margin: auto;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#wrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
 }
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
+
     width: 100%;
-
-
 }
 
-button{
+button {
     background: none;
     border: none;
     transition: 0.2s;
@@ -38,7 +49,7 @@ button{
 }
 
 button#units {
-    font-size: 1.2em;
+    font-size: 1.1em;
     background-color: var(--transparent-color);
     width: 30px;
     height: 30px;
@@ -64,4 +75,77 @@ button:hover {
 
 #search-input:focus {
     outline: none;
+}
+
+#city {
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+#date {
+    font-weight: normal;
+    font-size: 0.8em;
+    color: var(--faded-text-color);
+    text-align: center;
+}
+
+main {
+    display: grid;
+    width: 100%;
+}
+
+#weather-temp {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+hr {
+    margin: 20px 0px;
+    color: var(--transparent-color);
+}
+
+#weather-desc {
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#weather-feel {
+    color: var(--faded-text-color);
+    font-size: 0.8em;
+    padding-bottom: 10px;
+}
+
+#weather-today-flex {
+    display: flex;
+    justify-content: center;
+}
+
+#gif {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+#weather-future-section {
+    display: flex;
+    justify-content: space-around;
+
+    padding-bottom: 10px;
+}
+
+.weather-future > p {
+    font-size: 0.8em;
+}
+
+footer {
+    background-color: var(--transparent-color);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
 }

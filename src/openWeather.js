@@ -19,6 +19,7 @@ export async function getWeatherData(coords, units = "standard") {
         temp: data.current.temp,
         min: data.daily[0].temp.min,
         max: data.daily[0].temp.max,
+        date: data.current.dt,
         feels: data.current.feels_like,
         description: data.current.weather[0].description,
         future: [

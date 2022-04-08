@@ -18,23 +18,24 @@ const gifDOM = $("gif");
 
 const weatherFuture1IconDOM = $("weather-future-icon-1");
 const weatherFuture1MinDOM = $("min-1");
-const weatherFuture1MaxDOM = $('max-1')
+const weatherFuture1MaxDOM = $("max-1");
 const weatherFuture1Weekday = $("weather-future-1-weekday");
 
 const weatherFuture2IconDOM = $("weather-future-icon-3");
 const weatherFuture2MinDOM = $("min-2");
-const weatherFuture2MaxDOM = $('max-2')
+const weatherFuture2MaxDOM = $("max-2");
 const weatherFuture2Weekday = $("weather-future-2-weekday");
 
 const weatherFuture3IconDOM = $("weather-future-icon-3");
 const weatherFuture3MinDOM = $("min-3");
-const weatherFuture3MaxDOM = $('max-3')
+const weatherFuture3MaxDOM = $("max-3");
 const weatherFuture3Weekday = $("weather-future-3-weekday");
 
 function renderWeatherData(weather) {
     log(weather);
-    
+
     cityDOM.textContent = weather.place;
+    dateDOM.textContent = weather.date;
     temperatureTodayDOM.textContent = weather.temp;
     weatherDescriptionDOM.textContent = weather.description;
     temperatureMinDOM.textContent = weather.min;
@@ -55,8 +56,9 @@ function renderWeatherData(weather) {
 }
 
 // place
+// date
 // temp
-// min 
+// min
 // max
 // feels
 // description
@@ -97,8 +99,7 @@ let units = localStorage.getItem("units") || "imperial";
 
 //fetchAndRender(city, units);
 
-
-getCoords('recife').then(coords => {
-    log(coords)
-    getWeatherData(coords, 'metric').then(weather => renderWeatherData(weather))
-})
+getCoords("recife").then((coords) => {
+    log(coords);
+    getWeatherData(coords, "metric").then((weather) => renderWeatherData(weather));
+});

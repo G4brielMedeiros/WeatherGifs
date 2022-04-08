@@ -9,68 +9,72 @@
         <title>Weather GIFs</title>
     </head>
     <body>
-        <header>
-            <button id="units">°F</button>
-            <form action="" id="search-form">
-                <input type="text" id="search-input" />
-            </form>
-            <button>lang</button>
-        </header>
 
-        <main>
-            <section id="city-info">
-                <h1 id="city">Recife</h1>
-                <h2 id="date">Friday, April 8, 2022</h2>
-            </section>
-
-            <hr>
-
-            <section id="weather-today-section">
-                <p id="weather-temperature">31°c</p>
-            <hr>
-                <p id="weather-description">Sunny</p>
-                <p id="weather-min-max">
-                    <strong>25</strong>°c/
-                    <strong>32</strong>°c
-                </p>
-                <p id="weather-feels">Feels like 50°c</p>
-            </section>
-
-            <hr>
-
-            <section id="weather-future-section">
-
-                <div id="weather-future-1">
-                    <img src="" alt="[icon]" class="weather-future-icon-1">
-                    <p id="weather-future-1-min-max">
+        <div id="wrapper">
+            <header>
+                <button id="units">°F</button>
+                <form action="" id="search-form" autocomplete="off">
+                    <input type="text" id="search-input" />
+                </form>
+                <button id="language">🇧🇷</button>
+            </header>
+    
+            <main>
+                <section id="city-info">
+                    <h1 id="city">Recife</h1>
+                    <h2 id="date">Friday, April 8, 2022</h2>
+                </section>
+    
+                <hr>
+    
+                <section id="weather-today-section">
+                    <p id="weather-temperature">31°c</p>
+                <hr>
+                    <p id="weather-description">Sunny</p>
+                    <p id="weather-min-max">
                         <strong>25</strong>°c/
                         <strong>32</strong>°c
                     </p>
-                    <p class="weather-future-1-weekday">Saturday</p>
-                </div>
+                    <p id="weather-feels">Feels like 50°c</p>
+                </section>
+    
+                <hr>
+    
+                <section id="weather-future-section">
+    
+                    <div id="weather-future-1">
+                        <img src="" alt="[icon]" class="weather-future-icon-1">
+                        <p id="weather-future-1-min-max">
+                            <strong>25</strong>°c/
+                            <strong>32</strong>°c
+                        </p>
+                        <p class="weather-future-1-weekday">Saturday</p>
+                    </div>
+    
+    
+                    <div id="weather-future-2">
+                        <img src="" alt="[icon]" class="weather-future-icon-2">
+                        <p id="weather-future-2-min-max">
+                            <strong>25</strong>°c/
+                            <strong>32</strong>°c
+                        </p>
+                        <p class="weather-future-2-weekday">Sunday</p>
+                    </div>
+    
+                    <div id="weather-future-3">
+                        <img src="" alt="[icon]" class="weather-future-icon-3">
+                        <p id="weather-future-3-min-max">
+                            <strong>25</strong>°c/
+                            <strong>32</strong>°c
+                        </p>
+                        <p class="weather-future-3-weekday">Monday</p>
+                    </div>
+    
+                </section>
+            </main>
+    
+            <footer><a href="https://icons8.com">Icons by ICONS8.com</a></footer>
+        </div>
 
-
-                <div id="weather-future-2">
-                    <img src="" alt="[icon]" class="weather-future-icon-2">
-                    <p id="weather-future-2-min-max">
-                        <strong>25</strong>°c/
-                        <strong>32</strong>°c
-                    </p>
-                    <p class="weather-future-2-weekday">Sunday</p>
-                </div>
-
-                <div id="weather-future-3">
-                    <img src="" alt="[icon]" class="weather-future-icon-3">
-                    <p id="weather-future-3-min-max">
-                        <strong>25</strong>°c/
-                        <strong>32</strong>°c
-                    </p>
-                    <p class="weather-future-3-weekday">Monday</p>
-                </div>
-
-            </section>
-        </main>
-
-        <footer><a href="https://icons8.com">Icons by ICONS8.com</a></footer>
     </body>
 </html>

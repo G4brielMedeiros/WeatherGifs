@@ -4,11 +4,11 @@ const API_KEY = "ca659f3e8873be553c03fadf808cffe3";
 
 function getAPIcall(coords, units) {
     const API = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&units=${units}&exclude=hourly,minutely`;
-    log(API)
+    log(API);
     return API;
 }
 
-export async function getWeatherData(coords, units = "standard") {
+export async function getWeatherData(coords, units = "metric") {
     const response = await fetch(getAPIcall(coords, units), { mode: "cors" });
 
     const data = await response.json();
@@ -38,7 +38,7 @@ export async function getWeatherData(coords, units = "standard") {
                 min: data.daily[3].temp.min,
                 max: data.daily[3].temp.max,
             },
-        ]
+        ],
     };
     return formattedData;
 }
@@ -48,7 +48,7 @@ export async function getCoords(city) {
         `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`
     );
     const data = await response.json();
-    return {lat: data[0].lat, lon: data[0].lon, city: data[0].name};
+    return { lat: data[0].lat, lon: data[0].lon, city: data[0].name };
 }
 
 export const kelvinToCelsius = (temp) => temp - 273.15;

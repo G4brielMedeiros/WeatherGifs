@@ -1,6 +1,6 @@
 import { getGIFData } from "./giphy";
 import { getWeatherData, logWeatherData } from "./openWeather";
-import { getElement, log } from "./utility";
+import { getElement, log, normalize } from "./utility";
 
 const searchInputElement = getElement("search-input");
 const searchInputMetricElement = getElement("metric");
@@ -9,13 +9,13 @@ const weatherImgElement = getElement("weather-gif");
 const searchButtonElement = getElement("search-button");
 const weatherTemperatureElement = getElement("weather-temperature");
 
-function renderWeatherData(data, units) {
-    weatherStatusElement.innerText = data.description;
-
+function renderWeatherData(weather, units) {
+    weatherStatusElement.innerText = weather.description;
+    searchInputElement.placeholder = weather.place;
     const degree = units == "metric" ? " °C" : " °F";
 
-    weatherTemperatureElement.innerText = data.temp + degree;
-    log(data);
+    weatherTemperatureElement.innerText = weather.temp + degree;
+    log(weather);
 }
 
 function renderGIFData(url) {
@@ -23,27 +23,35 @@ function renderGIFData(url) {
     log(url);
 }
 
-async function search() {
-    weatherStatusElement.innerText = "loading...";
-    weatherImgElement.src = "images/loading.gif";
-
-    const units = searchInputMetricElement.checked ? "metric" : "imperial";
-    const city = searchInputElement.value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-
-    log(units);
-
+async function fetchAndRender(city, units) {
     const weather = await getWeatherData(city, units);
     const gif = await getGIFData(weather.title);
-
     renderGIFData(gif);
     renderWeatherData(weather, units);
 }
 
+function search() {
+    weatherStatusElement.innerText = "loading...";
+    weatherTemperatureElement.innerText = "loading...";
+    weatherImgElement.src = "images/loading.gif";
+
+
+
+    const units = searchInputMetricElement.checked ? "metric" : "imperial";
+    const city = normalize(searchInputElement.value);
+
+    localStorage.setItem('city', city);
+    localStorage.setItem('units', units);
+
+    log(units);
+
+    fetchAndRender(city, units);
+}
+
 searchButtonElement.addEventListener("click", search);
 
-getWeatherData("Brasilia", "metric").then((weather) => {
-    renderWeatherData(weather);
-    getGIFData(weather.title).then((data) => {
-        renderGIFData(data);
-    });
-});
+let city = localStorage.getItem('city') || "brasilia";
+let units = localStorage.getItem('units') || "imperial";
+
+fetchAndRender(city, units);
+

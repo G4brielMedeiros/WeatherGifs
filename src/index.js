@@ -83,19 +83,27 @@ function renderGIFData(url) {
 }
 
 async function fetchAndRender(city) {
-    const coords = await getCoords(city);
-    const weatherData = await getWeatherData(coords);
-    //const gif = await getGIFData(weather.title);
-    //renderGIFData(gif);
-    weather = weatherData;
-    renderWeatherData();
+   
+    try {
+        const coords = await getCoords(city);
+        const weatherData = await getWeatherData(coords);
+        //const gif = await getGIFData(weather.title);
+        //renderGIFData(gif);
+        weather = weatherData;
+        renderWeatherData();
+    } catch (error) {
+        $("city").textContent = "what?"
+    }
 }
 
 let weather;
 
 function search(search) {
-    $("weather-temp").innerText = "loading...";
-    $("city").innerText = "loading...";
+    $text("weather-temp", "loading...");
+    $text("city", "loading...");
+    $text("weather-future-1-min-max", "loading...")
+    $text("weather-future-2-min-max", "loading...")
+    $text("weather-future-3-min-max", "loading...")
     $("gif").src = "images/loading.gif";
 
     //const units = searchInputMetricElement.checked ? "metric" : "imperial";

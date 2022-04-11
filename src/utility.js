@@ -6,10 +6,6 @@ export const setText = (id, text) => (getElement(id).textContent = text);
 
 export const getValue = (id) => getElement(id).value;
 
-export function listen(element, trigger, callback) {
-    element.addEventListener(trigger, callback);
-}
-
 export const normalize = (input) =>
     input
         .toLowerCase()

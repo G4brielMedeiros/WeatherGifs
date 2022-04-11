@@ -5,7 +5,6 @@ import {
     getElement as $,
     setText as $text,
     getValue as $valueOf,
-    listen as $setListen,
     log,
     normalize,
 } from "./utility";
@@ -93,7 +92,7 @@ function search(search) {
 
 
 
-$setListen($("search-form"), "submit", () => search($valueOf("search-input")));
+$("search-form").addEventListener( "submit", () => search($valueOf("search-input")) );
 
 
 let city = localStorage.getItem("city") || "egypt";

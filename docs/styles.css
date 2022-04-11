@@ -110,7 +110,8 @@ hr {
     padding-bottom: 10px;
 }
 
-#weather-feel, #weather-feel-wrap {
+#weather-feel,
+#weather-feel-wrap {
     color: var(--faded-text-color);
     font-size: 0.8em;
     padding-bottom: 10px;
@@ -127,14 +128,14 @@ hr {
     border-radius: 10px;
 }
 
-#weather-future-section {
+#future-section {
     display: flex;
     justify-content: space-around;
 
     padding-bottom: 10px;
 }
 
-.weather-future > p {
+.future > p {
     font-size: 0.8em;
 }
 

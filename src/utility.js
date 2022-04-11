@@ -1,10 +1,10 @@
 export const log = (log) => console.log(log);
 
-export const getElement = (id) => document.getElementById(id);
+export const $ = (id) => document.getElementById(id);
 
-export const setText = (id, text) => (getElement(id).textContent = text);
+export const $text = (id, text) => ($(id).textContent = text);
 
-export const getValue = (id) => getElement(id).value;
+export const $valueOf = (id) => $(id).value;
 
 export const normalize = (input) =>
     input

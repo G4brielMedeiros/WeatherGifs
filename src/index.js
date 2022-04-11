@@ -1,6 +1,6 @@
 import { format, fromUnixTime, getDate, getDay, getMonth, getWeek } from "date-fns";
 import { getGIFData } from "./giphy";
-import { getCoords, getWeatherData, logWeatherData } from "./openWeather";
+import { convertUnit, getCoords, getWeatherData, logWeatherData } from "./openWeather";
 import {
     getElement as $,
     setText as $text,
@@ -26,24 +26,24 @@ const formatDate = (date) => {
     return format(fromUnixTime(date), "PPPPp");
 };
 
-function renderWeatherData(weather) {
-    log(weather);
+function renderWeatherData() {
+
 
     $text("city", weather.place);
     $text("date", formatDate(weather.date));
-    $text("weather-temp", weather.temp + "°C");
+    $text("weather-temp", convertUnit(weather.temp, units));
     $text("weather-desc", weather.description);
-    $text("weather-min-max", `${weather.min}°C / ${weather.max}°C`)
-    $text("weather-feel", `Feels like ${weather.feels}°C`);
+    $text("weather-min-max", `${convertUnit(weather.min, units)} / ${convertUnit(weather.max, units)}`)
+    $text("weather-feel", `Feels like ${convertUnit(weather.feels, units)}`);
     
     $text("weather-future-1-min-max", 
-    `${weather.future[0].min} °C / ${weather.future[0].max} °C`)
+    `${convertUnit(weather.future[0].min, units)} / ${convertUnit(weather.future[0].max, units)}`)
     
     $text("weather-future-2-min-max", 
-    `${weather.future[1].min} °C / ${weather.future[1].max} °C`)
+    `${convertUnit(weather.future[1].min, units)}  / ${convertUnit(weather.future[1].max, units)} `)
 
     $text("weather-future-3-min-max", 
-    `${weather.future[2].min} °C / ${weather.future[2].max} °C`)
+    `${convertUnit(weather.future[2].min, units)}  / ${convertUnit(weather.future[2].max, units)} `)
 
     $text("weather-future-1-weekday", getWeekDay(weather.future[0].dt));
     $text("weather-future-2-weekday", getWeekDay(weather.future[1].dt));
@@ -66,11 +66,14 @@ function renderGIFData(url) {
 
 async function fetchAndRender(city, units) {
     const coords = await getCoords(city);
-    const weather = await getWeatherData(coords, units);
+    const weatherData = await getWeatherData(coords, units);
     //const gif = await getGIFData(weather.title);
     //renderGIFData(gif);
-    renderWeatherData(weather);
+    weather = weatherData;
+    renderWeatherData();
 }
+
+let weather;
 
 function search(search) {
     $("weather-temp").innerText = "loading...";

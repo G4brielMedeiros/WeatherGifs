@@ -2,14 +2,14 @@ import { log } from "./utility";
 
 const API_KEY = "ca659f3e8873be553c03fadf808cffe3";
 
-function getAPIcall(coords, units) {
-    const API = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&units=${units}&exclude=hourly,minutely`;
+function getAPIcall(coords) {
+    const API = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&exclude=hourly,minutely`;
     log(API);
     return API;
 }
 
-export async function getWeatherData(coords, units = "metric") {
-    const response = await fetch(getAPIcall(coords, units), { mode: "cors" });
+export async function getWeatherData(coords) {
+    const response = await fetch(getAPIcall(coords), { mode: "cors" });
 
     const data = await response.json();
 
@@ -55,5 +55,5 @@ export const kelvinToCelsius = (temp) => temp - 273.15;
 
 export const kelvinToFahrenheit = (temp) => temp * 1.8 - 459.67;
 
-export const convertUnit = (temp, celsius) =>
-    celsius ? kelvinToCelsius(temp) : kelvinToFahrenheit(temp);
+export const convertUnit = (temp, unit) =>
+    (unit == "metric") ? kelvinToCelsius(temp).toFixed(0)+"°C" : kelvinToFahrenheit(temp).toFixed(0)+"°F";

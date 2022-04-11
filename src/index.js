@@ -23,9 +23,9 @@ const weekdays = [
 const getWeekDay = (date) => {return weekdays[fromUnixTime(date).getDay()]}
 
 const formatDate = (date) => {
-    const string = format(fromUnixTime(date), "PPPPpppp");
-    return string.slice(0, string.indexOf(" at"));
+    return format(fromUnixTime(date), "PPPPp");
 };
+
 function renderWeatherData(weather) {
     log(weather);
 
@@ -33,17 +33,17 @@ function renderWeatherData(weather) {
     $text("date", formatDate(weather.date));
     $text("weather-temp", weather.temp + "°C");
     $text("weather-desc", weather.description);
-    $text("min", weather.min);
-    $text("max", weather.max);
+    $text("weather-min-max", `${weather.min}°C / ${weather.max}°C`)
     $text("weather-feel", `Feels like ${weather.feels}°C`);
+    
+    $text("weather-future-1-min-max", 
+    `${weather.future[0].min} °C / ${weather.future[0].max} °C`)
+    
+    $text("weather-future-2-min-max", 
+    `${weather.future[1].min} °C / ${weather.future[1].max} °C`)
 
-    $text("min-1", weather.future[0].min);
-    $text("min-2", weather.future[1].min);
-    $text("min-3", weather.future[2].min);
-
-    $text("max-1", weather.future[0].max);
-    $text("max-2", weather.future[1].max);
-    $text("max-3", weather.future[2].max);
+    $text("weather-future-3-min-max", 
+    `${weather.future[2].min} °C / ${weather.future[2].max} °C`)
 
     $text("weather-future-1-weekday", getWeekDay(weather.future[0].dt));
     $text("weather-future-2-weekday", getWeekDay(weather.future[1].dt));
@@ -72,13 +72,13 @@ async function fetchAndRender(city, units) {
     renderWeatherData(weather);
 }
 
-function search() {
-    weatherStatusElement.innerText = "loading...";
-    weatherTemperatureElement.innerText = "loading...";
-    weatherImgElement.src = "images/loading.gif";
+function search(search) {
+    $("weather-temp").innerText = "loading...";
+    $("city").innerText = "loading...";
+    $("gif").src = "images/loading.gif";
 
-    const units = searchInputMetricElement.checked ? "metric" : "imperial";
-    const city = normalize(searchInputElement.value);
+    //const units = searchInputMetricElement.checked ? "metric" : "imperial";
+    const city = normalize($("search-input").value);
 
     localStorage.setItem("city", city);
     localStorage.setItem("units", units);
@@ -88,9 +88,11 @@ function search() {
     fetchAndRender(city, units);
 }
 
-let city = localStorage.getItem("city") || "brasilia";
-let units = localStorage.getItem("units") || "imperial";
 
-$setListen($("search-form"), "submit", () => fetchAndRender($valueOf("search-input")));
 
+$setListen($("search-form"), "submit", () => search($valueOf("search-input")));
+
+
+let city = localStorage.getItem("city") || "egypt";
+let units = localStorage.getItem("units") || "metric";
 fetchAndRender(city);

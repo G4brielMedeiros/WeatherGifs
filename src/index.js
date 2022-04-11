@@ -29,6 +29,7 @@ function save() {
 }
 
 function loading() {
+    $("search-input").value = ""
     $text("weather-temp", "loading...");
     $text("city", "loading...");
     $text("future-1-min-max", "loading...");
@@ -38,6 +39,15 @@ function loading() {
 }
 
 function renderWeatherData() {
+
+    if (weather.temp > 300) {
+        $("body").classList.remove("cold");
+        $("body").classList.add("warm");
+    } else {
+        $("body").classList.remove("warm");
+        $("body").classList.add("cold");
+    }
+
     $text("units", units == "metric" ? "°C" : "°F");
     $text("city", weather.place);
     $text("date", formatDate(weather.date));
@@ -70,8 +80,7 @@ async function fetchAndRender(city) {
         //renderGIFData(gif);
         renderWeatherData();
     } catch (error) {
-        $text("city", "what?");
-        $text("weather-temp", "I can't find this city.")
+        handleError();
     }
 }
 
@@ -97,4 +106,28 @@ $("units").addEventListener("click", (e) => {
 });
 
 
-fetchAndRender(city)
+fetchAndRender(city);
+
+
+function handleError() {
+    $text("city", "What?");
+    $text("weather-temp", "I can't find this city.")
+
+    $text("units", "---");
+    $text("date", "---");
+    $text("weather-desc", "---");
+    $text("weather-feel", "---");
+
+    $text("weather-min-max", "---");
+
+    $text("future-1-min-max", "---");
+
+    $text("future-2-min-max", "---");
+
+    $text("future-3-min-max", "---");
+
+    $text("future-1-weekday", "---");
+    $text("future-2-weekday", "---");
+    $text("future-3-weekday", "---");
+
+}

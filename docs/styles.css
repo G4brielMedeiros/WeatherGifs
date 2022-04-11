@@ -13,8 +13,17 @@
     font-size: 18px;
 }
 
-body {
+.warm {
     background-color: var(--bg-warm);
+}
+
+.cold {
+    background-color: var(--bg-cold);
+}
+
+
+body {
+   
 
     margin: auto;
 

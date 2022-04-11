@@ -31,11 +31,11 @@ function renderWeatherData(weather) {
 
     $text("city", weather.place);
     $text("date", formatDate(weather.date));
-    $text("weather-temp", weather.temp);
+    $text("weather-temp", weather.temp + "°C");
     $text("weather-desc", weather.description);
     $text("min", weather.min);
     $text("max", weather.max);
-    $text("weather-feel", weather.feels);
+    $text("weather-feel", `Feels like ${weather.feels}°C`);
 
     $text("min-1", weather.future[0].min);
     $text("min-2", weather.future[1].min);

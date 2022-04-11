@@ -19,30 +19,49 @@ const weekdays = [
     "Saturday",
 ];
 
-const getWeekDay = (date) => {return weekdays[fromUnixTime(date).getDay()]}
+const getWeekDay = (date) => {
+    return weekdays[fromUnixTime(date).getDay()];
+};
 
 const formatDate = (date) => {
     return format(fromUnixTime(date), "PPPPp");
 };
 
 function renderWeatherData() {
-
-
+    $text("units", units == "metric" ? "°C" : "°F");
     $text("city", weather.place);
     $text("date", formatDate(weather.date));
     $text("weather-temp", convertUnit(weather.temp, units));
     $text("weather-desc", weather.description);
-    $text("weather-min-max", `${convertUnit(weather.min, units)} / ${convertUnit(weather.max, units)}`)
+    $text(
+        "weather-min-max",
+        `${convertUnit(weather.min, units)} / ${convertUnit(weather.max, units)}`
+    );
     $text("weather-feel", `Feels like ${convertUnit(weather.feels, units)}`);
-    
-    $text("weather-future-1-min-max", 
-    `${convertUnit(weather.future[0].min, units)} / ${convertUnit(weather.future[0].max, units)}`)
-    
-    $text("weather-future-2-min-max", 
-    `${convertUnit(weather.future[1].min, units)}  / ${convertUnit(weather.future[1].max, units)} `)
 
-    $text("weather-future-3-min-max", 
-    `${convertUnit(weather.future[2].min, units)}  / ${convertUnit(weather.future[2].max, units)} `)
+    $text(
+        "weather-future-1-min-max",
+        `${convertUnit(weather.future[0].min, units)} / ${convertUnit(
+            weather.future[0].max,
+            units
+        )}`
+    );
+
+    $text(
+        "weather-future-2-min-max",
+        `${convertUnit(weather.future[1].min, units)}  / ${convertUnit(
+            weather.future[1].max,
+            units
+        )}`
+    );
+
+    $text(
+        "weather-future-3-min-max",
+        `${convertUnit(weather.future[2].min, units)}  / ${convertUnit(
+            weather.future[2].max,
+            units
+        )}`
+    );
 
     $text("weather-future-1-weekday", getWeekDay(weather.future[0].dt));
     $text("weather-future-2-weekday", getWeekDay(weather.future[1].dt));
@@ -63,9 +82,9 @@ function renderGIFData(url) {
     log(url);
 }
 
-async function fetchAndRender(city, units) {
+async function fetchAndRender(city) {
     const coords = await getCoords(city);
-    const weatherData = await getWeatherData(coords, units);
+    const weatherData = await getWeatherData(coords);
     //const gif = await getGIFData(weather.title);
     //renderGIFData(gif);
     weather = weatherData;
@@ -87,14 +106,24 @@ function search(search) {
 
     log(units);
 
-    fetchAndRender(city, units);
+    fetchAndRender(city);
 }
 
-
-
-$("search-form").addEventListener( "submit", () => search($valueOf("search-input")) );
-
+$("search-form").addEventListener("submit", () => search($valueOf("search-input")));
 
 let city = localStorage.getItem("city") || "egypt";
 let units = localStorage.getItem("units") || "metric";
 fetchAndRender(city);
+
+$("units").addEventListener("click", (e) => {
+    if (e.target.textContent == "°F") {
+        e.target.textContent = "°C";
+        units = "metric";
+    } else {
+        e.target.textContent = "°F";
+        units = "imperial";
+    }
+
+    localStorage.setItem("units", units);
+    renderWeatherData();
+});

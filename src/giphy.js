@@ -9,6 +9,5 @@ function getAPIcall(query) {
 export async function getGIFData(query) {
     const response = await fetch(getAPIcall(query), { mode: "cors" });
     const data = await response.json();
-
     return data.data.images.original.url;
 }

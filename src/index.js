@@ -21,7 +21,7 @@ const getWeekDay = (date) => weekdays[fromUnixTime(date).getDay()];
 
 const formatDate = (date) => format(fromUnixTime(date), "PPPPp");
 
-const renderGIFData = (url) => weatherImgElement.src = url;
+const renderGIFData = (url) => $("gif").src = url;
 
 function save() {
     localStorage.setItem("city", city);
@@ -76,8 +76,8 @@ async function fetchAndRender(city) {
     try {
         const coords = await getCoords(city);
         weather = await getWeatherData(coords);
-        //const gif = await getGIFData(weather.title);
-        //renderGIFData(gif);
+        const gif = await getGIFData(weather.description);
+        renderGIFData(gif);
         renderWeatherData();
     } catch (error) {
         handleError();
@@ -112,22 +112,15 @@ fetchAndRender(city);
 function handleError() {
     $text("city", "What?");
     $text("weather-temp", "I can't find this city.")
-
     $text("units", "---");
     $text("date", "---");
     $text("weather-desc", "---");
     $text("weather-feel", "---");
-
     $text("weather-min-max", "---");
-
     $text("future-1-min-max", "---");
-
     $text("future-2-min-max", "---");
-
     $text("future-3-min-max", "---");
-
     $text("future-1-weekday", "---");
     $text("future-2-weekday", "---");
     $text("future-3-weekday", "---");
-
 }
